@@ -4,6 +4,7 @@ const { DBCONNECTION } = require('./config/dataBase');
 const { errorHandler } = require('./middleware/Error/ErrorHandler');
 const passport = require('passport');
 const session = require('express-session');
+const userRouter = require('./router/userRouter');
 require('./auth');
 
 const port = EnviromentVariables.PORT;
@@ -36,14 +37,19 @@ app.get('/auth/google/callback', passport.authenticate('google', {
 }));
 
 app.get('/auth/google/success', (req, res) => {
+    let email = req.user.email;
+    console.log(email);
     res.json({
-        message: "Hello there"
+        message: "Hello there",
+        data: email
     });
 });
 
 app.get('/auth/google/failure', (req, res) => {
     res.redirect('/');
 });
+
+app.use('/api/user', userRouter);
 
 
 
