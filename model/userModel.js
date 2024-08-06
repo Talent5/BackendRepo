@@ -15,7 +15,7 @@ const userModel = new mongoose.Schema({
     GPA: { type: String },
     graduation_date: { type: String },
     date_of_birth: { type: String },
-    document: { type: String }
+    uploadedCV: { type: String }
 });
 
 module.exports = mongoose.model('users', userModel);

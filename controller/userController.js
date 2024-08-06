@@ -1,4 +1,5 @@
 const userModel = require('../model/userModel');
+const cloudinary = require('../utils/cloudinary');
 
 exports.updateUser = async (req, res) => {
     try {
@@ -31,7 +32,7 @@ exports.uploadDocument = async (req, res, next) => {
 
         const imageURL = await cloudinary.uploads(files.path);
 
-        const uploadFile = await userModel.findByIdAndUpdate(user._id, { document: imageURL.url }, { new: true });
+        const uploadFile = await userModel.findByIdAndUpdate(user._id, { uploadedCV: imageURL.url }, { new: true });
 
         res.status(200).json({
             status: "Successful",
