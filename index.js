@@ -38,7 +38,7 @@ app.get('/auth/google/callback', passport.authenticate('google', {
 
 app.get('/auth/google/success', (req, res) => {
     let email = req.user.email;
-    console.log(email);
+    // console.log(email);
     res.json({
         message: "Hello there",
         data: email
@@ -46,12 +46,12 @@ app.get('/auth/google/success', (req, res) => {
 });
 
 app.get('/auth/google/failure', (req, res) => {
-    res.redirect('/');
+    res.status(400).json({
+        message: "Failed to continue with Google"
+    });
 });
 
 app.use('/api/user', userRouter);
-
-
 
 app.use(errorHandler);
 

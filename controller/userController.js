@@ -17,3 +17,28 @@ exports.updateUser = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+const uploadAvatar = async (req, res, next) => {
+    try {
+        const id = req.user._id;
+        const user = await userModel.findById(id);
+
+        // if (!user) return res.status(404).json({ message: "User does not exist" });
+        if (!user) throw new AppError(404, "User does not exist");
+
+        const files = req.file;
+        if (!files) return res.status.json({ message: "File is required" });
+
+        const imageURL = await cloudinary.uploads(files.path);
+
+        const uploadFile = await userModel.findByIdAndUpdate(user._id, { document: imageURL.url }, { new: true });
+
+        res.status(200).json({
+            status: "Successful",
+            data: uploadFile
+        });
+
+    } catch (error) {
+        return next(error);
+    }
+};
