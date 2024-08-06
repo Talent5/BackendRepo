@@ -18,9 +18,9 @@ exports.updateUser = async (req, res) => {
     }
 };
 
-const uploadAvatar = async (req, res, next) => {
+exports.uploadDocument = async (req, res, next) => {
     try {
-        const id = req.user._id;
+        const id = req.params.userId;
         const user = await userModel.findById(id);
 
         // if (!user) return res.status(404).json({ message: "User does not exist" });
