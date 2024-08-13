@@ -2,10 +2,11 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const { EnviromentVariables } = require('./config/EnvironmentVariables');
 const userModel = require('./model/userModel');
+// https://somaai.onrender.com/auth/google/callback
 passport.use(new GoogleStrategy({
     clientID: EnviromentVariables.GOOGLE_CLIENT_ID,
     clientSecret: EnviromentVariables.GOOGLE_CLIENT_SECRET,
-    callbackURL: 'http://localhost:5000/auth/google/callback',
+    callbackURL: 'https://somaai.onrender.com/auth/google/callback',
     passReqToCallback: true
 }, async (req, res, accessToken, refreshToken, profile, done) => {
     try {
