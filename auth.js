@@ -15,11 +15,10 @@ passport.use(new GoogleStrategy({
             return done(null, existingUser);
         }
 
-        const
-            newUser = new userModel({
-                googleId: profile.id,
-                email: profile.emails[ 0 ].value
-            });
+        const newUser = new userModel({
+            googleId: profile.id,
+            email: profile.emails[ 0 ].value
+        });
 
         await newUser.save();  // Use await for asynchronous operations
         done(null, newUser);
