@@ -39,10 +39,7 @@ app.get('/auth/google/callback', passport.authenticate('google', {
 app.get('/auth/google/success', (req, res) => {
     let email = req.user.email;
     // console.log(email);
-    res.json({
-        message: "Hello there",
-        data: email
-    });
+    res.redirect('http://localhost:3000/onboarding2')
 });
 
 app.get('/auth/google/failure', (req, res) => {
