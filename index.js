@@ -13,7 +13,12 @@ const app = express();
 
 DBCONNECTION();
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000/onboarding2',
+    methods: [ 'GET', 'POST', 'PATCH', 'DELETE' ],
+    allowedHeaders: [ 'Content-Type', 'Authorization' ]
+}));
+
 app.use(express.json());
 
 app.use(session({
