@@ -5,6 +5,7 @@ const { errorHandler } = require('./middleware/Error/ErrorHandler');
 const passport = require('passport');
 const session = require('express-session');
 const userRouter = require('./router/userRouter');
+const cors = require('cors');
 require('./auth');
 
 const port = EnviromentVariables.PORT;
@@ -12,6 +13,7 @@ const app = express();
 
 DBCONNECTION();
 
+app.use(cors());
 app.use(express.json());
 
 app.use(session({
@@ -39,7 +41,7 @@ app.get('/auth/google/callback', passport.authenticate('google', {
 app.get('/auth/google/success', (req, res) => {
     // let email = req.user.email;
     // console.log(email);
-    res.redirect('http://localhost:3000/onboarding2')
+    res.redirect('http://localhost:3000/onboarding2');
 });
 
 app.get('/auth/google/failure', (req, res) => {
